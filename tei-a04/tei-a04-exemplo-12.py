@@ -13,4 +13,5 @@ for marca in data.json():
 #mostrar somente os nomes das marcas
 for marca in data.json():
     print(marca['name'])
+    
 

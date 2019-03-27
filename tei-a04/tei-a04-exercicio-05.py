@@ -1,18 +1,22 @@
-import os
 import csv
 import json
 
-os.system("cls")
+#o programa a seguir le um arquivo csv e cria um json
 
-line = []
+termos = []
+data = {}
 
-fcsv = open("output.csv","r",encoding="iso-8859-1")
+#leitura do arquivo csv
+fcsv = open("output.csv","r",newline='',encoding='utf8')
 reader = csv.reader(fcsv)
+
 for row in reader:
-    line.append(row)
+    termos = row[0].split(";")
+    data[termos[0]] = {"nome":termos[1],"email":termos[2]}
 
+fcsv.close()
 
-
-print(line)
-
-fcsv.close
+#criacao arquivo json
+fjson = open("csv-to-json.json","w",encoding="utf-8")
+json.dump(data,fjson,sort_keys=True,indent=4)
+fjson.close()

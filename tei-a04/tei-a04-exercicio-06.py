@@ -1,16 +1,22 @@
-def copyFile(fileOrigin,fileTarget):
+import json
+import requests
 
-    f1 = open(fileOrigin,'r',encoding="utf-8")
-    f2 = open(fileTarget,'w+',encoding="utf-8")
-    
-    f2.write(f1.read())
+data = requests.get(url="http://fipeapi.appspot.com/api/1/carros/marcas.json")
+for marca in data.json():
+    print("Marca:",marca['name'],"- ID:", marca['id'])
 
-    f1.close()
-    f2.close()
+idMarca = int(input("Digite o ID da marca: "))
+data = requests.get(url="http://fipeapi.appspot.com/api/1/carros/veiculos/"+str(idMarca)+".json")
+for veiculo in data.json():
+    print("Modelo:",veiculo['name'],"- ID:", veiculo['id'])
 
-def main():
-    file1 = "paises.txt"
-    file2 = "paises-cp.txt"
-    copyFile(file1,file2)
+idModelo = int(input("Digite o ID da modelo: "))
+data = requests.get(url="http://fipeapi.appspot.com/api/1/carros/veiculo/"+str(idMarca)+"/"+str(idModelo)+".json")
+for veiculo in data.json():
+    print("Ano e Combustivel:",veiculo['name'],"- ID:", veiculo['id'])
 
-main()
+idAnoCombustivel = input("Digite o ID da Ano/Combustível: ")
+#data = requests.get(url="http://fipeapi.appspot.com/api/1/carros/veiculo/"+str(idMarca)+"/"+str(idModelo)+"/"+str(idAnoCombustivel)+".json")
+data = requests.get(url="http://fipeapi.appspot.com/api/1/carros/veiculo/21/4828/2013-1.json")
+for veiculo in data.json():
+    print(veiculo)

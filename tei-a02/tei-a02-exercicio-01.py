@@ -1,6 +1,3 @@
-import os
-os.system('cls')
-
 nome = input("Digite o nome do produto: ")
 valor = float(input("Digite o valor do produto: "))
 

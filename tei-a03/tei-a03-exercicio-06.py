@@ -1,28 +1,16 @@
-def isPar(valor):
-    if valor % 2 == 0:
-        return True
-    else:
-        return False
+from random import randint
 
-def qtdPares(valores):
-    count = 0
-    for valor in valores:
-        if isPar(valor):
-            count+=1
-    return count
+vetor = []
 
-def qtdImpares(valores):
-    return len(valores)-qtdPares(valores)
+for i in range(15):
+    vetor.append(randint(0,255))
 
-def main():
-    numeros = (1,2,3,4,5,6)
+print("Vetor antes da divisao:",vetor)
 
-    print(numeros)
-    print("Quantidade de pares:", qtdPares(numeros))
-    print("Quantidade de impares:", qtdImpares(numeros))
-    print("Maior valor:", max(numeros))
-    print("Menor valor:", min(numeros))
-    print("Soma dos valores:", sum(numeros))
-    print("Quantidade de itens:", len(numeros))
-    
-main()
+maiorValor = max(vetor)
+print("Maior valor: ",maiorValor)
+
+for i in range(len(vetor)):
+    vetor[i] = vetor[i]/maiorValor
+
+print("Vetor depois da divisao:",vetor)

@@ -1,12 +1,3 @@
-resistencias = []
+ano = int(input("Digite um ano: "))
 
-for i in range(4):
-    resistencias.append(int(input("Digite o valor da resistencia: ")))
-
-print("Resistencias fornecidas:")
-for resistencia in resistencias:
-    print(resistencia,end=", ")
-
-print("\nA resistencia equivalente e:",sum(resistencias))
-print("A maior resistencia e:",max(resistencias))
-print("A menor resistencia e:",min(resistencias))
+print(ano//100 if ano%100 == 0 else ano//100+1)

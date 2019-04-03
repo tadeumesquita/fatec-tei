@@ -7,7 +7,7 @@ somaMedia, aprovados, reprovados = 0, 0, 0
 
 #alunos.append(Aluno("João da Silva", 5, 6, (5+6/2), "Aprovado" if (5+6/2) >= 5 else "Reprovado"))
 
-for i in range(2):
+for i in range(6):
     nome = input("Digite o nome: ")
     nota1 = float(input("Digite a primeira nota: "))
     nota2 = float(input("Digite a segunda nota: "))

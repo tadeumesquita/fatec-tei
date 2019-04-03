@@ -1,28 +1,27 @@
-def isPar(valor):
-    if valor % 2 == 0:
-        return True
+import collections
+
+Produto = collections.namedtuple("Produto","nome preco")
+
+produtos = []
+valoresMedios = []
+qtdeBaratos, qtdeCaros, somaPrecoCaros = 0, 0, 0
+
+for i in range(5):
+    nome = input("Digite o nome do produto: ")
+    preco = float(input("Digite o valor do produto: "))
+    produtos.append(Produto(nome,preco))
+
+for produto in produtos:
+    if produto.preco < 50:
+        qtdeBaratos = qtdeBaratos + 1
+    elif 50 <= produto.preco <= 100:
+        valoresMedios.append(produto.nome)
     else:
-        return False
+        qtdeCaros = qtdeCaros + 1
+        somaPrgitecoCaros = somaPrecoCaros + produto.preco
 
-def qtdPares(valores):
-    count = 0
-    for valor in valores:
-        if isPar(valor):
-            count+=1
-    return count
-
-def qtdImpares(valores):
-    return len(valores)-qtdPares(valores)
-
-def main():
-    numeros = (1,2,3,4,5,6)
-
-    print(numeros)
-    print("Quantidade de pares:", qtdPares(numeros))
-    print("Quantidade de impares:", qtdImpares(numeros))
-    print("Maior valor:", max(numeros))
-    print("Menor valor:", min(numeros))
-    print("Soma dos valores:", sum(numeros))
-    print("Quantidade de itens:", len(numeros))
-    
-main()
+print("Quantidade de produtos abaixo de R$50,00:",qtdeBaratos)
+print("Produtos com preço entre R$50,00 e R$100,00:")
+for produto in valoresMedios:
+    print(produto)
+print("Média de preços dos produtos acima de R$100,00:",somaPrecoCaros/qtdeCaros)

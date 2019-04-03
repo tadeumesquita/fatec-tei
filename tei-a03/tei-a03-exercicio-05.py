@@ -1,7 +1,6 @@
 def checkPalindrome(lista):
     listaAoContrario = lista.copy()
     listaAoContrario.reverse()
-    #print(cmp(lista,listaAoContrario))
     
     if lista == listaAoContrario:
         return True

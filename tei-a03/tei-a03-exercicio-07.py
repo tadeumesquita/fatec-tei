@@ -1,28 +1,18 @@
-def isPar(valor):
-    if valor % 2 == 0:
-        return True
-    else:
-        return False
+from random import randint
 
-def qtdPares(valores):
-    count = 0
-    for valor in valores:
-        if isPar(valor):
-            count+=1
-    return count
+vetor = []
 
-def qtdImpares(valores):
-    return len(valores)-qtdPares(valores)
-
-def main():
-    numeros = (1,2,3,4,5,6)
-
-    print(numeros)
-    print("Quantidade de pares:", qtdPares(numeros))
-    print("Quantidade de impares:", qtdImpares(numeros))
-    print("Maior valor:", max(numeros))
-    print("Menor valor:", min(numeros))
-    print("Soma dos valores:", sum(numeros))
-    print("Quantidade de itens:", len(numeros))
+def maiorProduto(vetor):
+    maxProduto=-101 #definido o valor máximo como um valor a menos do menor valor possível conforme o randint
+    for i in range(len(vetor)-1):
+        if vetor[i]*vetor[i+1] > maxProduto:
+            maxProduto=vetor[i]*vetor[i+1]
     
-main()
+    return maxProduto
+
+for i in range(5):
+    vetor.append(randint(-10,10))
+
+print(vetor)
+
+print(maiorProduto(vetor))

@@ -1,0 +1,213 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.4.18
+-- Dumped by pg_dump version 9.4.18
+-- Started on 2019-05-15 08:13:16
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 1 (class 3079 OID 11855)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2015 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 174 (class 1259 OID 16414)
+-- Name: tb_editora; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.tb_editora (
+    id_editora integer NOT NULL,
+    nome character varying(50)
+);
+
+
+ALTER TABLE public.tb_editora OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 16412)
+-- Name: tb_editora_id_editora_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.tb_editora_id_editora_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tb_editora_id_editora_seq OWNER TO postgres;
+
+--
+-- TOC entry 2016 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: tb_editora_id_editora_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.tb_editora_id_editora_seq OWNED BY public.tb_editora.id_editora;
+
+
+--
+-- TOC entry 176 (class 1259 OID 16422)
+-- Name: tb_livros; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE public.tb_livros (
+    id_livro integer NOT NULL,
+    id_editora integer,
+    titulo character varying(50)
+);
+
+
+ALTER TABLE public.tb_livros OWNER TO postgres;
+
+--
+-- TOC entry 175 (class 1259 OID 16420)
+-- Name: tb_livros_id_livro_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.tb_livros_id_livro_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tb_livros_id_livro_seq OWNER TO postgres;
+
+--
+-- TOC entry 2017 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: tb_livros_id_livro_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.tb_livros_id_livro_seq OWNED BY public.tb_livros.id_livro;
+
+
+--
+-- TOC entry 1887 (class 2604 OID 16417)
+-- Name: id_editora; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tb_editora ALTER COLUMN id_editora SET DEFAULT nextval('public.tb_editora_id_editora_seq'::regclass);
+
+
+--
+-- TOC entry 1888 (class 2604 OID 16425)
+-- Name: id_livro; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tb_livros ALTER COLUMN id_livro SET DEFAULT nextval('public.tb_livros_id_livro_seq'::regclass);
+
+
+--
+-- TOC entry 2004 (class 0 OID 16414)
+-- Dependencies: 174
+-- Data for Name: tb_editora; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.tb_editora (id_editora, nome) FROM stdin;
+1	FATEC RP
+\.
+
+
+--
+-- TOC entry 2018 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: tb_editora_id_editora_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.tb_editora_id_editora_seq', 1, true);
+
+
+--
+-- TOC entry 2006 (class 0 OID 16422)
+-- Dependencies: 176
+-- Data for Name: tb_livros; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.tb_livros (id_livro, id_editora, titulo) FROM stdin;
+1	1	Python Cookbook
+\.
+
+
+--
+-- TOC entry 2019 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: tb_livros_id_livro_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.tb_livros_id_livro_seq', 1, true);
+
+
+--
+-- TOC entry 1890 (class 2606 OID 16419)
+-- Name: pk_id_editora; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.tb_editora
+    ADD CONSTRAINT pk_id_editora PRIMARY KEY (id_editora);
+
+
+--
+-- TOC entry 1892 (class 2606 OID 16427)
+-- Name: pk_id_livro; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY public.tb_livros
+    ADD CONSTRAINT pk_id_livro PRIMARY KEY (id_livro);
+
+
+--
+-- TOC entry 1893 (class 2606 OID 16428)
+-- Name: fk_id_editora; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tb_livros
+    ADD CONSTRAINT fk_id_editora FOREIGN KEY (id_editora) REFERENCES public.tb_editora(id_editora);
+
+
+--
+-- TOC entry 2014 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2019-05-15 08:13:17
+
+--
+-- PostgreSQL database dump complete
+--
+

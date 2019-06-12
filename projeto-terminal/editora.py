@@ -174,6 +174,14 @@ def excluir(tabela):
 def exportarDados():
     return True
 
+def sobre():
+    limparTela()
+    print("O projeto apresenta de forma simplificada um sistema de uma livraria")
+    print("onde são cadastrados os livros e as editoras dos livros.")
+    print("Além disso tem os usuários do sistema que podem fazer qualquer ação.")
+    print("\n=====DESENVOLVEDORES=====\nAntonio Tadeu Campos Mesquita - RA: 2840481621003\nGuilherme Aroxa - RA: 2840481621025")
+    input()
+
 def main():
 
     opcao = -1
@@ -202,6 +210,9 @@ def main():
 
                 print("======================\n\n=======Administração=======")
                 print("[13] Exportar dados")
+
+                print("======================\n\n=======Créditos=======")
+                print("[14] Sobre o Projeto")
                 
                 print("\n[0] Sair\n")
                 opcao = int(input("Digite uma opção: "))
@@ -232,6 +243,8 @@ def main():
                     excluir("usuario")
                 elif opcao == 13:
                     exportarDados()
+                elif opcao == 14:
+                    sobre()
                 elif opcao != 0:
                     print("ops... esta opção não é válida!")
 

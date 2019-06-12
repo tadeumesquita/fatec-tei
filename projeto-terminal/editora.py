@@ -142,8 +142,9 @@ def atualizar(tabela):
     elif tabela == "usuario":
         login = input("\nDigite o login do usuario que deseja atualizar: ")
         nome = input("\nDigite o nome correto do usuário: ")
-        sql = "UPDATE usuario SET nome=%s WHERE login=%s"
-        cursor.execute(cursor.mogrify(sql,(nome,login)))
+        senha = input("\nDigite a senha nova do usuário: ")
+        sql = "UPDATE usuario SET nome=%s, senha=%s WHERE login=%s"
+        cursor.execute(cursor.mogrify(sql,(nome,senha,login)))
         conexao.commit()
 
 #DELETE
@@ -151,13 +152,24 @@ def excluir(tabela):
     listar(tabela,False)
     conexao = conectarDB()
     cursor = conexao.cursor()
-
+    
+    if tabela == "editora":
+        id = int(input("\nDigite o ID da editora que deseja excluir: "))
+        sql = "DELETE FROM editora WHERE id={0}".format(id)
+        cursor.execute(sql)
+        conexao.commit()
+    elif tabela == "livro":
+        id = int(input("\nDigite o ID do livro que deseja excluir: "))
+        sql = "DELETE FROM livro WHERE id={0}".format(id)
+        cursor.execute(sql)
+        conexao.commit()
+    elif tabela == "usuario":
+        id = input("\nDigite o login do usuario que deseja excluir: ")
+        sql = "DELETE FROM usuario WHERE login='{0}'".format(id)
+        cursor.execute(sql)
+        conexao.commit()
 
     conexao.close()
-
-
-    return True
-
 
 def exportarDados():
     return True
